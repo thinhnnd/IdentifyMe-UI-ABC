@@ -91,6 +91,16 @@ const routes = [
     ]
   },
   {
+    path: "/join-us",
+    name: "Join Us",
+    component: () => import("../views/JoinOurTeam.vue"),
+  },
+  {
+    path: "/applicants",
+    name: "Join Us",
+    component: () => import("../views/Applicants.vue"),
+  },
+  {
     path: "/login",
     name: "Login",
     component: () => import("../components/Auth/Login.vue"),
