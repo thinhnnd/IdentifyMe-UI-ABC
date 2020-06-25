@@ -101,8 +101,8 @@ const routes = [
     component: () => import("../views/Applicants.vue"),
   },
   {
-    path: "/proof-request",
-    name: "Applicants",
+    path: "/applicants/proof-request",
+    name: "ApplicantsProofRequest",
     component: () => import("../components/JoinOurTeam/ProofRequest.vue"),
   },
   {

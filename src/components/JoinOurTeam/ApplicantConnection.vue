@@ -85,6 +85,8 @@ export default {
           //this.setConnection(connectionPayload);
           this.isConnected = true;
           this.show = false;
+          this.$router.push({ path: '/applicants/proof-request', name: 'ApplicantsProofRequest', params: { applicant : this.applicant } } )
+
           //this.setInvitation(null);
         }
       );
