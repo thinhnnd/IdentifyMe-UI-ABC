@@ -61,7 +61,9 @@ export const fetchConnectionInvitationById = async (connection_id) => {
       headers: headers
     });
     const json = await response.json();
-    if (json) return json.results;
+    // if (json) return json.results;
+    if (json.error) throw json;
+    return json;
   } catch (error) {
     console.error(error);
     throw error;

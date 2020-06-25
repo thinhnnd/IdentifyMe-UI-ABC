@@ -97,8 +97,21 @@ const routes = [
   },
   {
     path: "/applicants",
-    name: "Join Us",
+    name: "Applicants",
     component: () => import("../views/Applicants.vue"),
+  },
+  {
+    path: "/proof-request",
+    name: "Applicants",
+    component: () => import("../components/JoinOurTeam/ProofRequest.vue"),
+  },
+  {
+    path: "/applicants/connect",
+    name: "ApplicantsConnections",
+    component: () => import("../components/JoinOurTeam/ApplicantConnection.vue"),
+    props: (route) => ({
+      user: {...route.params }
+    })
   },
   {
     path: "/login",
