@@ -35,3 +35,19 @@ export const submitApplicantFormRequest = async body => {
       throw error;
     }
   };
+
+  export const updateApplciant = async (id, body) => {
+    try {
+      const response = await fetch(`${API_ENDPOINT}/applicant/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(body),
+        headers: {
+          ...headers,
+          "Content-Type": "application/json; charset=utf-8"
+        }
+      });
+    } catch (error) {
+      console.log('update applicant error', error);
+      throw error;
+    }
+  }
