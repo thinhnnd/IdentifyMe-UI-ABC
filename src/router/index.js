@@ -92,7 +92,7 @@ const routes = [
   },
   {
     path: "/join-us",
-    name: "Join Us",
+    name: "JoinOurTeam",
     component: () => import("../views/JoinOurTeam.vue"),
   },
   {

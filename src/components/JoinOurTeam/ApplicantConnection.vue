@@ -27,6 +27,7 @@ import { mapActions, mapState, mapGetters } from "vuex";
 import { fetchConnectionInvitationById } from '../../api/connections.api'
 export default {
   name: "CreateConnection",
+  props: ['applicantGlobalVar'],
   components: {
     QRCode
   },
@@ -40,12 +41,12 @@ export default {
   },
   async mounted() {
     try {
-    console.log('props', this.$route.params)
-    const {applicant} = this.$route.params;
-    this.applicant = applicant;
-    console.log('applicant',applicant)
+    //console.log('props', this.$route.params)
+    //const {applicant} = this.$route.params;
+    this.applicant = this.applicantGlobalVar;
+    console.log('applicant',this.applicantGlobalVar)
     //const related_connection = await fetchConnectionInvitationById(applicant.connection_id);
-    this.invitationUrl = applicant.invitation_url;
+    this.invitationUrl = this.applicantGlobalVar.invitation_url;
     this.show = true;
     this.handleConnectionConnected()
     //console.log('related_connection', related_connection);
@@ -85,8 +86,7 @@ export default {
           //this.setConnection(connectionPayload);
           this.isConnected = true;
           this.show = false;
-          this.$router.push({ path: '/applicants/proof-request', name: 'ApplicantsProofRequest', params: { applicant : this.applicant } } )
-
+          this.$emit('submitApplicant', this.applicant)
           //this.setInvitation(null);
         }
       );

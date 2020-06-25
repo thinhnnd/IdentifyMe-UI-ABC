@@ -5,16 +5,18 @@
     </h2>
 
     <h3>Trạng thái xác minh:</h3>
-    <h2 v-if="isValidated">Đã xác minh</h2>
-    <h2 v-else>
-      Chưa xác minh
-    </h2>
+    <div v-if="proof != null">
+      <ProofCard :proof="proof" />
+    </div>
+    <h2 v-if="isValidated">Xác minh thành công, NeeBooBox sẽ liên hệ bạn qua email và số điện thoại đã cung cấp</h2>
+
   </el-container>
 </template>
 
 <script>
   import { createProofRequest } from '../../api/proof.api';
   import { updateApplciant } from '../../api/applicant.api';
+  import ProofCard from "../Proof/List/ProofCard";
 
   const credential_definition_id = `Dkckb8nZty927vFbm1NbK2:3:CL:24149:UIT-University_default`;
   const requestedAttributes = {
@@ -53,6 +55,7 @@
   
   
   export default {
+    props: ['applicantGlobalVar'],
     data: () => ({
       isValidated: false,
       isFinished: false,
@@ -62,10 +65,11 @@
       comment: '',
       proof: null
     }),
+    components: { ProofCard },
     async mounted () {
-      console.log('props', this.$route.params)
-      const {applicant} = this.$route.params;
-      this.applicant = applicant;
+      // console.log('props', this.$route.params)
+      // const {applicant} = this.$route.params;
+      this.applicant = this.applicantGlobalVar;
       await this.sendRequest();
     },
     methods: {
@@ -90,6 +94,7 @@
         const updatedApplicant = await updateApplciant(this.applicant.id, { proof_id: result.presentation_exchange_id} )
         this.applicant = updatedApplicant;
         console.log("sendRequest -> result", result);
+        this.$emit('submitApplicant', this.applicant)
         if (result.presentation_exchange_id) {
           this.$notify({
             title: "Sent",
