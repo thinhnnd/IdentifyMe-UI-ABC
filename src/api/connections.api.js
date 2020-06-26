@@ -54,12 +54,15 @@ export const acceptInvitation = async invitation_payload => {
   }
 };
 
-export const fetchConnectionInvitationById = async (connection_id) => {
+export const fetchConnectionInvitationById = async connection_id => {
   try {
-    const response = await fetch(`${API_ENDPOINT}/connections/${connection_id}`, {
-      method: "GET",
-      headers: headers
-    });
+    const response = await fetch(
+      `${API_ENDPOINT}/connections/${connection_id}`,
+      {
+        method: "GET",
+        headers: headers
+      }
+    );
     const json = await response.json();
     // if (json) return json.results;
     if (json.error) throw json;
@@ -68,7 +71,7 @@ export const fetchConnectionInvitationById = async (connection_id) => {
     console.error(error);
     throw error;
   }
-}
+};
 
 const connections = {
   results: [

@@ -128,8 +128,11 @@ export default {
   },
   mounted() {
     console.log("proof", this.item);
-    this.revealed_attrs = this.item.presentation.requested_proof.revealed_attrs;
-    this.predicates = this.item.presentation.requested_proof.predicates;
+    if (this.item.state === "verified") {
+      this.revealed_attrs = this.item.presentation.requested_proof.revealed_attrs;
+      console.log('revealed_attrs', this.revealed_attrs)
+      this.predicates = this.item.presentation.requested_proof.predicates;
+    }
     this.requested_predicates = this.item.presentation_request.requested_predicates;
     console.log(
       "mounted -> this.requested_predicates",
@@ -161,7 +164,7 @@ export default {
   color: #000 !important;
 }
 .detail-prepend {
-  width: 100px !important;
+  width: 40vh !important;
   font-weight: bold !important;
   color: #000;
 }

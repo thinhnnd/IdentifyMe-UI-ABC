@@ -93,24 +93,25 @@ const routes = [
   {
     path: "/join-us",
     name: "JoinOurTeam",
-    component: () => import("../views/JoinOurTeam.vue"),
+    component: () => import("../views/JoinOurTeam.vue")
   },
   {
     path: "/applicants",
     name: "Applicants",
-    component: () => import("../views/Applicants.vue"),
+    component: () => import("../views/Applicants.vue")
   },
   {
     path: "/applicants/proof-request",
     name: "ApplicantsProofRequest",
-    component: () => import("../components/JoinOurTeam/ProofRequest.vue"),
+    component: () => import("../components/JoinOurTeam/ProofRequest.vue")
   },
   {
     path: "/applicants/connect",
     name: "ApplicantsConnections",
-    component: () => import("../components/JoinOurTeam/ApplicantConnection.vue"),
-    props: (route) => ({
-      user: {...route.params }
+    component: () =>
+      import("../components/JoinOurTeam/ApplicantConnection.vue"),
+    props: route => ({
+      user: { ...route.params }
     })
   },
   {

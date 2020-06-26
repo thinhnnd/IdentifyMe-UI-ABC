@@ -24,10 +24,10 @@
 <script>
 import QRCode from "qrcode.vue";
 import { mapActions, mapState, mapGetters } from "vuex";
-import { fetchConnectionInvitationById } from '../../api/connections.api'
+import { fetchConnectionInvitationById } from "../../api/connections.api";
 export default {
   name: "CreateConnection",
-  props: ['applicantGlobalVar'],
+  props: ["applicantGlobalVar"],
   components: {
     QRCode
   },
@@ -41,23 +41,23 @@ export default {
   },
   async mounted() {
     try {
-    //console.log('props', this.$route.params)
-    //const {applicant} = this.$route.params;
-    this.applicant = this.applicantGlobalVar;
-    console.log('applicant',this.applicantGlobalVar)
-    //const related_connection = await fetchConnectionInvitationById(applicant.connection_id);
-    this.invitationUrl = this.applicantGlobalVar.invitation_url;
-    this.show = true;
-    this.handleConnectionConnected()
-    //console.log('related_connection', related_connection);
-    if (this.error) {
-      this.$notify({
-        title: "Error",
-        type: "error",
-        message: this.errorMessage
-      });
-      this.reset();
-    }
+      //console.log('props', this.$route.params)
+      //const {applicant} = this.$route.params;
+      this.applicant = this.applicantGlobalVar;
+      console.log("applicant", this.applicantGlobalVar);
+      //const related_connection = await fetchConnectionInvitationById(applicant.connection_id);
+      this.invitationUrl = this.applicantGlobalVar.invitation_url;
+      this.show = true;
+      this.handleConnectionConnected();
+      //console.log('related_connection', related_connection);
+      if (this.error) {
+        this.$notify({
+          title: "Error",
+          type: "error",
+          message: this.errorMessage
+        });
+        this.reset();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -66,7 +66,7 @@ export default {
     return {
       isConnected: false,
       show: false,
-      invitationUrl: '',
+      invitationUrl: "",
       applicant: null
     };
   },
@@ -86,7 +86,7 @@ export default {
           //this.setConnection(connectionPayload);
           this.isConnected = true;
           this.show = false;
-          this.$emit('submitApplicant', this.applicant)
+          this.$emit("submitApplicant", this.applicant);
           //this.setInvitation(null);
         }
       );
