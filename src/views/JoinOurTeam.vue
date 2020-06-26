@@ -77,9 +77,8 @@ export default {
       this.applicantGlobalVar = value;
       this.step = this.step + 1;
     },
-    hitNextStep () {
-      if(this.step < 3) 
-        this.step = this.step + 1;
+    hitNextStep() {
+      if (this.step < 3) this.step = this.step + 1;
     },
     toggleLoadding() {
       this.loading = !this.loading;

@@ -1,8 +1,8 @@
 <template>
   <el-container class="create-invitation">
-    
     <h2 v-if="!isValidated">
-      Chúng tôi đã gửi một yêu cầu xác minh bằng cấp trên thiết bị di động của bạn
+      Chúng tôi đã gửi một yêu cầu xác minh bằng cấp trên thiết bị di động của
+      bạn
       <br />
       Vui lòng chấp thuận để tiến hành xác minh.
     </h2>
@@ -15,7 +15,6 @@
     <div v-if="proof != null">
       <ProofCard :proof="proof" />
     </div>
-
   </el-container>
 </template>
 
@@ -130,7 +129,7 @@ export default {
             this.isValidated = presentationExchange.verified;
             console.log("updated proof", this.proof);
             //this.updateProofList(presentationExchange);
-            this.$emit('hitNextStep');
+            this.$emit("hitNextStep");
           }
         );
       }

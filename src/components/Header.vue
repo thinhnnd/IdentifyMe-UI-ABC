@@ -50,8 +50,8 @@
               >
               <el-menu-item index="7-2" @click="handleRequestProofClick"
                 >Yêu cầu xác minh</el-menu-item
-              >
-            </el-submenu>.
+              > </el-submenu
+            >.
             <el-menu-item @click="handleRecruimentClick" index="8">
               <template slot="title">Tuyển dụng</template>
             </el-menu-item>
@@ -122,7 +122,8 @@ export default {
       if (this.$route.path !== "/about/ssi") this.$router.push("/about/ssi");
     },
     handleRecruimentClick() {
-      if (this.$route.path !== "/recruitment") this.$router.push("/recruitment");
+      if (this.$route.path !== "/recruitment")
+        this.$router.push("/recruitment");
     }
   },
   computed: {

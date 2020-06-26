@@ -130,7 +130,7 @@ export default {
     console.log("proof", this.item);
     if (this.item.state === "verified") {
       this.revealed_attrs = this.item.presentation.requested_proof.revealed_attrs;
-      console.log('revealed_attrs', this.revealed_attrs)
+      console.log("revealed_attrs", this.revealed_attrs);
       this.predicates = this.item.presentation.requested_proof.predicates;
     }
     this.requested_predicates = this.item.presentation_request.requested_predicates;

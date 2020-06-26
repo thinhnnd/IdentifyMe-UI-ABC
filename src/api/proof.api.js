@@ -34,13 +34,15 @@ export const getProofRequests = async () => {
   }
 };
 
-export const getProofRecordById = async (id) => {
+export const getProofRecordById = async id => {
   try {
-    const response = await fetch(`${API_ENDPOINT}/present-proof/records/${id}`, {
-      method: "GET"
-    });
+    const response = await fetch(
+      `${API_ENDPOINT}/present-proof/records/${id}`,
+      {
+        method: "GET"
+      }
+    );
     const json = await response.json();
-
 
     if (json.name === "Error") throw json;
     return json;
@@ -48,4 +50,4 @@ export const getProofRecordById = async (id) => {
     console.error(error);
     throw error;
   }
-}
+};
