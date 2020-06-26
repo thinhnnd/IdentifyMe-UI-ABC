@@ -1,7 +1,10 @@
 <template>
   <div>
     <portal-target name="proof-item-detail"></portal-target>
-    <el-table :data="tableData" style="width: 100%">
+    <el-table v-loading="isLoading" 
+      element-loading-text="Đang tải danh sách ứng viên..."
+      :data="tableData" 
+      style="width: 100%">
       <el-table-column fixed prop="date_submit" label="Ngày nộp" width="150">
       </el-table-column>
       <el-table-column prop="name" label="Họ tên" width="240">
@@ -91,6 +94,7 @@ export default {
           return item;
         })
       );
+
     }
   },
   data() {
@@ -112,7 +116,6 @@ export default {
       // })
       const applicants = await this.getProofRecords(res);
       console.log("applicants", applicants);
-
       this.tableData = applicants;
       this.isLoading = false;
     }
