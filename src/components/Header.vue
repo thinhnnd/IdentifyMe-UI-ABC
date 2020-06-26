@@ -55,7 +55,11 @@
             <el-menu-item @click="handleRecruimentClick" index="8">
               <template slot="title">Tuyển dụng</template>
             </el-menu-item>
-            <el-menu-item v-if="!!user && user.role === 'admin'" @click="handleApplicantClick" index="user">
+            <el-menu-item
+              v-if="!!user && user.role === 'admin'"
+              @click="handleApplicantClick"
+              index="user"
+            >
               <template slot="title">Danh sách ứng viên</template>
             </el-menu-item>
             <el-submenu v-if="!!user" index="user">
@@ -129,8 +133,7 @@ export default {
         this.$router.push("/recruitment");
     },
     handleApplicantClick() {
-      if (this.$route.path !== "/applicants")
-        this.$router.push("/applicants");
+      if (this.$route.path !== "/applicants") this.$router.push("/applicants");
     }
   },
   computed: {
