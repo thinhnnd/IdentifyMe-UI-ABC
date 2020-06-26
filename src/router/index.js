@@ -96,23 +96,18 @@ const routes = [
     component: () => import("../views/JoinOurTeam.vue")
   },
   {
+    path: "/recruitment",
+    name: "Recruitment",
+    component: () => import("../views/Recruitment.vue")
+  },
+  {
     path: "/applicants",
     name: "Applicants",
-    component: () => import("../views/Applicants.vue")
-  },
-  {
-    path: "/applicants/proof-request",
-    name: "ApplicantsProofRequest",
-    component: () => import("../components/JoinOurTeam/ProofRequest.vue")
-  },
-  {
-    path: "/applicants/connect",
-    name: "ApplicantsConnections",
-    component: () =>
-      import("../components/JoinOurTeam/ApplicantConnection.vue"),
-    props: route => ({
-      user: { ...route.params }
-    })
+    component: () => import("../views/Applicants.vue"),
+    meta: {
+      requiresAuth: true,
+      is_admin: true
+    }
   },
   {
     path: "/login",

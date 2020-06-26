@@ -84,7 +84,6 @@ export default {
       //   }
       //this.$router.push({ path: '/applicants/connect', name: 'ApplicantsConnections', params: { applicant : result } } );
       this.$emit("submitApplicant", this.applicant);
-      console.log("submit Applicant ", this.applicant);
     }
   }
 };
