@@ -22,8 +22,9 @@
 import { createProofRequest } from "../../api/proof.api";
 import { updateApplciant } from "../../api/applicant.api";
 import ProofCard from "../Proof/List/ProofCard";
+import { UIT_CRED_DEF_ID } from '../../config'
 
-const credential_definition_id = `Dkckb8nZty927vFbm1NbK2:3:CL:24149:UIT-University_default`;
+const credential_definition_id = CRED_DEF_ID;
 const requestedAttributes = {
   schema_attrs: [
     "date_of_birth",

@@ -7,4 +7,6 @@ export const headers = {
   referrerPolicy: "no-referrer",
   "Cache-Control": "no-cache"
 };
-export const LEDGER_URL = "http://test.bcovrin.vonx.io";
+export const LEDGER_URL = process.env.LEDGER_URL || "http://test.bcovrin.vonx.io";
+
+export const UIT_CRED_DEF_ID = process.env.UIT_CRED_DEF_ID || "Dkckb8nZty927vFbm1NbK2:3:CL:24119:UIT-University_default";
