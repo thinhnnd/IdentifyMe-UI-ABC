@@ -44,7 +44,7 @@ const requestedPredicates = [
   {
     name: "score",
     p_type: ">=",
-    p_value: "7",
+    p_value: "70",
     restrictions: [
       {
         cred_def_id: credential_definition_id
