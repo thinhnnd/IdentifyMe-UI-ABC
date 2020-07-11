@@ -4,7 +4,7 @@ const state = {
   user: JSON.parse(localStorage.getItem("user"))
 };
 const getters = {
-  isAdmin: () => state.user && state.user.role
+  isAdmin: () => state.user && state.user.role === "admin"
 };
 const mutations = {
   LOGIN_USER: (state, user) => {

@@ -1,6 +1,8 @@
 <template>
   <div class="login">
-    <img alt="Vue logo" src="../../assets/Identifyme-logo.png" />
+    <div class="img-wrapper">
+      <img alt="Vue logo" src="../../assets/Identifyme-logo.png" />
+    </div>
     <el-card>
       <h2>Login to Identify.Me</h2>
       <el-form

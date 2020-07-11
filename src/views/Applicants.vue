@@ -7,7 +7,12 @@
       :data="tableData"
       style="width: 100%"
     >
-      <el-table-column fixed prop="date_submit" label="Ngày nộp" width="150">
+      <el-table-column
+        :formatter="formatDate"
+        prop="date_submit"
+        label="Ngày nộp"
+        width="95"
+      >
       </el-table-column>
       <el-table-column prop="name" label="Họ tên" width="240">
       </el-table-column>
@@ -35,13 +40,13 @@
           >
         </template>
       </el-table-column>
-      <el-table-column fixed="right" label="Operations" width="120">
+      <el-table-column fixed="right" label="Action" width="60">
         <template slot-scope="scope">
           <el-button
             @click="handleClick(scope.row.proof_record)"
             type="text"
             size="small"
-            >Chi tiết xác minh</el-button
+            >Chi tiết</el-button
           >
           <ProofItemDetail
             v-if="showProof"
@@ -96,6 +101,9 @@ export default {
           return item;
         })
       );
+    },
+    formatDate(row, column, cellValue, index) {
+      return cellValue.split("T")[0];
     }
   },
   data() {
@@ -118,6 +126,13 @@ export default {
       const applicants = await this.getProofRecords(res);
       console.log("applicants", applicants);
       this.tableData = applicants;
+      this.isLoading = false;
+    } else {
+      this.$message({
+        title: "Not Found",
+        message: "Hiện không có ứng viên!",
+        type: "info"
+      });
       this.isLoading = false;
     }
   }

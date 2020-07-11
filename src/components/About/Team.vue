@@ -2,7 +2,9 @@
   <el-container>
     <el-row style="display:flex;justify-content: center">
       <el-col :xs="24" :md="24" :lg="8" :xl="8">
-        <img alt="Vue logo" src="../../assets/Identifyme-logo.png" />
+        <div class="img-wrapper">
+          <img alt="Vue logo" src="../../assets/Identifyme-logo.png" />
+        </div>
         <p>
           Đội ngũ phát triển hệ thống Identify.Me gồm hai thành viên trẻ, năng
           động, thích phiêu lưu khám phá

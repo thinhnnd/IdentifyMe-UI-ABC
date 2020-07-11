@@ -5,5 +5,15 @@ module.exports = {
       title: "All in NeeBoo | NeeBoo Box Corporation"
     }
   },
-  productionSourceMap: false
+  productionSourceMap: false,
+  configureWebpack: config => {
+    if (process.env.NODE_ENV === "production") {
+      // mutate config for production...
+      console.log("config webpack", config.devtool);
+
+      config.devtool = false;
+    } else {
+      // mutate for development...
+    }
+  }
 };
