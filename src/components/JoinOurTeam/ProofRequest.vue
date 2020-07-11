@@ -24,14 +24,14 @@ import { updateApplciant } from "../../api/applicant.api";
 import ProofCard from "../Proof/List/ProofCard";
 import { UIT_CRED_DEF_ID } from '../../config'
 
-const credential_definition_id = CRED_DEF_ID;
+const credential_definition_id = UIT_CRED_DEF_ID;
 const requestedAttributes = {
   schema_attrs: [
-    "date_of_birth",
-    "major",
-    "name",
-    "mode_of_study",
-    "degree_classification"
+    "Date Of Birth",
+    "Major",
+    "Name",
+    "Mode Of Study",
+    "Degree Classification"
   ],
   restrictions: [
     {
@@ -52,7 +52,7 @@ const requestedPredicates = [
     ]
   },
   {
-    name: "graduated_year",
+    name: "Graduated Year",
     p_type: ">=",
     p_value: "2015",
     restrictions: [
