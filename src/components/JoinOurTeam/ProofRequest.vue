@@ -22,7 +22,7 @@
 import { createProofRequest } from "../../api/proof.api";
 import { updateApplciant } from "../../api/applicant.api";
 import ProofCard from "../Proof/List/ProofCard";
-import { UIT_CRED_DEF_ID } from '../../config'
+import { UIT_CRED_DEF_ID } from "../../config";
 
 const credential_definition_id = UIT_CRED_DEF_ID;
 const requestedAttributes = {
