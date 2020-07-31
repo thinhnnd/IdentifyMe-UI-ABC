@@ -39,7 +39,7 @@ const requestedAttributes = {
 
 const requestedPredicates = [
   {
-    name: "score",
+    name: "GPA",
     p_type: ">=",
     p_value: "70",
     restrictions: [
