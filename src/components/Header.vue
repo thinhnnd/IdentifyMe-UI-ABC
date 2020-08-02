@@ -20,10 +20,10 @@
                 >Đội ngũ phát triển</el-menu-item
               >
             </el-submenu>
-            <el-menu-item index="5" @click="handleConnectionClick"
-              >Kết nối công dân</el-menu-item
-            >
-            <el-submenu index="6">
+            <el-menu-item index="5" @click="handleConnectionClick" v-if="user"
+              >Kết nối công dân
+            </el-menu-item>
+            <el-submenu index="6" v-if="isAdmin">
               <template slot="title">Quản lý Schema</template>
               <el-menu-item index="6-1" @click="handleListSchemaClick"
                 >Danh sách Schema</el-menu-item
@@ -35,7 +35,7 @@
                 >Tạo mới Credential Definition</el-menu-item
               >
             </el-submenu>
-            <el-submenu index="4">
+            <el-submenu index="4" v-if="isAdmin">
               <template slot="title">Cấp Chứng nhận</template>
               <el-menu-item index="4-1" @click="handleIssueClick"
                 >Việc làm</el-menu-item
@@ -43,7 +43,7 @@
               <el-menu-item index="4-2" disabled>Bảng lương</el-menu-item>
               <el-menu-item index="4-3" disabled>Thực tập</el-menu-item>
             </el-submenu>
-            <el-submenu index="7">
+            <el-submenu index="7" v-if="isAdmin">
               <template slot="title">Xác minh/ Chứng thực</template>
               <el-menu-item index="7-1" @click="handleProofListClick"
                 >Danh sách bằng chứng</el-menu-item
@@ -52,7 +52,11 @@
                 >Yêu cầu xác minh</el-menu-item
               > </el-submenu
             >.
-            <el-menu-item @click="handleRecruimentClick" index="8">
+            <el-menu-item
+              @click="handleRecruimentClick"
+              index="8"
+              v-if="!isAdmin"
+            >
               <template slot="title">Tuyển dụng</template>
             </el-menu-item>
             <el-menu-item
@@ -65,7 +69,13 @@
             <el-submenu v-if="!!user" index="user">
               <template slot="title">
                 Hi, {{ user.username }}
-                <el-avatar icon="el-icon-user-solid"></el-avatar>
+                <el-avatar
+                  :src="
+                    isAdmin
+                      ? require('@/assets/admin.png')
+                      : require('@/assets/user.png')
+                  "
+                ></el-avatar>
               </template>
               <el-menu-item index="7-1" @click="logoutUser"
                 >Logout</el-menu-item
@@ -82,7 +92,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   name: "Header",
   data() {
@@ -137,7 +147,8 @@ export default {
     }
   },
   computed: {
-    ...mapState("auth/", ["user"])
+    ...mapState("auth/", ["user"]),
+    ...mapGetters("auth/", ["isAdmin"])
   }
 };
 </script>

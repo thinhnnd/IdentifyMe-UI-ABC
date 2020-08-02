@@ -5,26 +5,46 @@
       Identity
     </h2>
     <QRCode v-if="show" :value="invitationUrl" size="200"></QRCode>
-
-    <h2 v-if="isConnected">SSI Client has been accepted</h2>
-    <h2 v-else>
-      Công dân, người lao động dùng app tạo và quét mã sau để kết nối
-    </h2>
     <el-button
       type="primary"
       @click="onClickCreateInvitation()"
-      :disabled="isConnected"
+      :disabled="isConnected || !!didcomm"
       :loading="loading"
-      >Tạo mã QR</el-button
-    >
-    <el-divider></el-divider>
-    <el-input
-      type="textarea"
-      :rows="4"
-      placeholder="Invitation url"
-      v-model="invitationUrl"
-      disabled
-    ></el-input>
+      >Tạo mã QR
+    </el-button>
+    <br />
+    <el-col v-if="!isMobileAgent" width="100%">
+      <h2 v-if="isConnected">Client đã kết nối</h2>
+      <h2 v-else>
+        Công dân, người lao động dùng app tạo và quét mã sau để kết nối
+      </h2>
+      <el-divider></el-divider>
+      <el-input
+        type="textarea"
+        :rows="4"
+        placeholder="Invitation url"
+        v-model="invitationUrl"
+        disabled
+      ></el-input>
+    </el-col>
+    <div v-else>
+      <el-button
+        v-if="didcomm"
+        type="text"
+        plain
+        :disabled="!didcomm"
+        @click="() => {}"
+      >
+        <el-link
+          :disabled="!didcomm"
+          :underline="false"
+          icon="el-icon-connection"
+          :href="didcomm"
+          class="btn__text"
+          >Kết nối bằng ứng dụng IdentifyMe
+        </el-link>
+      </el-button>
+    </div>
   </el-container>
 </template>
 
@@ -95,7 +115,11 @@ export default {
   computed: {
     ...mapGetters("connections/", ["invitationUrl"]),
     ...mapState("connections/", ["invitation"]),
-    ...mapState(["loading", "error", "errorMessage"])
+    ...mapState(["loading", "error", "errorMessage", "isMobileAgent"]),
+    didcomm() {
+      const b64 = this.invitationUrl && this.invitationUrl.split("?c_i=")[1];
+      return b64 && "didcomm://invite?c_i=" + b64;
+    }
   }
 };
 </script>
@@ -104,5 +128,8 @@ export default {
 .create-invitation {
   flex-direction: column;
   align-items: center;
+}
+.btn__text {
+  margin: 0 5px 0 5px;
 }
 </style>

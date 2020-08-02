@@ -26,10 +26,7 @@ import { UIT_CRED_DEF_ID } from "../../config";
 
 const credential_definition_id = UIT_CRED_DEF_ID;
 const requestedAttributes = {
-  schema_attrs: [
-    "Name",
-    "Major"
-  ],
+  schema_attrs: ["Name", "Major"],
   restrictions: [
     {
       cred_def_id: credential_definition_id
