@@ -1,23 +1,48 @@
 <template>
   <el-container class="create-invitation">
-    <h2>
-      Hệ thống kết nối các công dân, người lao động sử dụng Self-Soverereign
-      Identity
-    </h2>
-    <QRCode v-if="show" :value="invitationUrl" size="200"></QRCode>
-
-    <h2 v-if="isConnected">SSI Client has been accepted</h2>
-    <h2 v-else>
-      Công dân, người lao động dùng app tạo và quét mã sau để kết nối
-    </h2>
-    <el-divider></el-divider>
-    <el-input
-      type="textarea"
-      :rows="4"
-      placeholder="Invitation url"
-      v-model="invitationUrl"
-      disabled
-    ></el-input>
+    <div v-if="!isMobileAgent">
+      <h2>
+        Hệ thống kết nối các công dân, người lao động sử dụng Self-Soverereign
+        Identity
+      </h2>
+      <h2 v-if="isConnected">SSI Client has been accepted</h2>
+      <h2 v-else>
+        Ứng viên sử dụng IdentifyMe quét mã sau để kết nối
+      </h2>
+      <QRCode v-if="show" :value="invitationUrl" size="200"></QRCode>
+      <el-divider></el-divider>
+      <el-input
+        type="textarea"
+        :rows="4"
+        placeholder="Invitation url"
+        v-model="invitationUrl"
+        disabled
+      ></el-input>
+    </div>
+    <div v-else>
+      <h2 v-if="isConnected">SSI Client has been accepted</h2>
+      <h3 v-else>
+        Ứng viên nhấn vào liên kết dưới để thực hiện các bước tiếp theo trên ứng
+        dụng IdentifyMe.
+      </h3>
+      <el-divider></el-divider>
+      <el-button
+        v-if="didcomm"
+        type="success"
+        plain
+        :disabled="!didcomm"
+        @click="() => {}"
+      >
+        <el-link
+          :disabled="!didcomm"
+          :underline="false"
+          icon="el-icon-connection"
+          :href="didcomm"
+          class="btn__text"
+          >Mở trên ứng dụng IdentifyMe
+        </el-link>
+      </el-button>
+    </div>
   </el-container>
 </template>
 
@@ -41,15 +66,10 @@ export default {
   },
   async mounted() {
     try {
-      //console.log('props', this.$route.params)
-      //const {applicant} = this.$route.params;
       this.applicant = this.applicantGlobalVar;
-      console.log("applicant", this.applicantGlobalVar);
-      //const related_connection = await fetchConnectionInvitationById(applicant.connection_id);
       this.invitationUrl = this.applicantGlobalVar.invitation_url;
       this.show = true;
       this.handleConnectionConnected();
-      //console.log('related_connection', related_connection);
       if (this.error) {
         this.$notify({
           title: "Error",
@@ -82,53 +102,20 @@ export default {
             type: "success",
             duration: 5000
           });
-          //replace connection in Array with new connection payload
-          //this.setConnection(connectionPayload);
           this.isConnected = true;
           this.show = false;
           this.$emit("submitApplicant", this.applicant);
-          //this.setInvitation(null);
         }
       );
     }
+  },
+  computed: {
+    ...mapState(["isMobileAgent"]),
+    didcomm() {
+      const b64 = this.invitationUrl && this.invitationUrl.split("?c_i=")[1];
+      return b64 && "didcomm://invite?c_i=" + b64;
+    }
   }
-  // methods: {
-  //   ...mapActions("connections/", [
-  //     "createInvitation",
-  //     "setConnection",
-  //     "setInvitation"
-  //   ]),
-  //   ...mapActions(["reset"]),
-  //   async onClickCreateInvitation() {
-  //     await this.createInvitation();
-  //     if (this.invitationUrl) this.show = true;
-  //     this.handleConnectionConnected();
-  //   },
-  //   handleConnectionConnected() {
-  //     //state o trang thai active hoac response moi nhan duoc data de notify
-  //     this.sockets.subscribe(
-  //       this.invitation.connection_id,
-  //       connectionPayload => {
-  //         this.$notify({
-  //           title: "Accepted",
-  //           message: `Invitation has been accepted by ${connectionPayload.their_label}`,
-  //           type: "success",
-  //           duration: 5000
-  //         });
-  //         //replace connection in Array with new connection payload
-  //         this.setConnection(connectionPayload);
-  //         this.isConnected = true;
-  //         this.show = false;
-  //         this.setInvitation(null);
-  //       }
-  //     );
-  //   }
-  // },
-  // computed: {
-  //   ...mapGetters("connections/", ["invitationUrl"]),
-  //   ...mapState("connections/", ["invitation"]),
-  //   ...mapState(["loading", "error", "errorMessage"])
-  // }
 };
 </script>
 
