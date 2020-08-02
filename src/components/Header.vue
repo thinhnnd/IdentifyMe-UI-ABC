@@ -50,8 +50,8 @@
               >
               <el-menu-item index="7-2" @click="handleRequestProofClick"
                 >Yêu cầu xác minh</el-menu-item
-              > </el-submenu
-            >.
+              >
+            </el-submenu>
             <el-menu-item
               @click="handleRecruimentClick"
               index="8"
